@@ -190,7 +190,6 @@ class ControllerPaymentVeritransmandiri extends Controller {
     $payloads['transaction_details'] = $transaction_details;
     $payloads['item_details']        = $item_details;
     $payloads['customer_details']    = $customer_details;
-    $option_flag = 0;
 
     try {
       $enabled_payments = array();
@@ -199,6 +198,7 @@ class ControllerPaymentVeritransmandiri extends Controller {
       
       $payloads['vtweb']['enabled_payments'] = $enabled_payments;
       $bins = $this->config->get('veritransmandiri_bin_number');
+      error_log(print_r($bins,TRUE));
       $bins = explode(',', $bins);
       $payloads['vtweb']['credit_card_bins'] = $bins;
 
@@ -254,11 +254,12 @@ class ControllerPaymentVeritransmandiri extends Controller {
         }
 
         if ($is_installment && ($num_products == 1)
-            && ($transaction_details['gross_amount'] >= 500000) && ($option_flag !=0)) {
+            && ($transaction_details['gross_amount'] >= 500000)) {
           $payment_options['installment']['installment_terms'] = $installment_terms;
           $payloads['vtweb']['payment_options'] = $payment_options;
         }
       }
+      error_log(print_r($payloads,TRUE));
       $redirUrl = Veritrans_VtWeb::getRedirectionUrl($payloads);
 
       if ($is_installment) {
@@ -269,9 +270,6 @@ class ControllerPaymentVeritransmandiri extends Controller {
         }
         else if ($transaction_details['gross_amount'] < 500000) {
           $redirUrl = $warningUrl . $redirUrl . '&message=2';
-        }
-        else if($option_flag == 0){
-          $redirUrl = $warningUrl . $redirUrl . '&message=3';
         }
       }
       else if ($this->config->get('veritransmandiri_installment_option') == 'all_product' &&
