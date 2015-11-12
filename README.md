@@ -4,10 +4,12 @@ Official Veritrans OpenCart Extension
 Veritrans :heart: OpenCart!
 
 This is the official Veritrans extension for the OpenCart E-commerce platform.
+This module is an expansion pack of `vtweb-opencart-master.zip` module, and have dependencies with the basic _OpenCart_ 
+This expansion pack is intended to use for Mandiri Online Installment.
 
 ## Installation
 
-1. Extract the `vtweb-opencart-master.zip` file.
+1. Extract the `vtweb-opencart-2.0-mandiri-master.zip` file.
 
 2. Locate the root _OpenCart_ directory of your shop via FTP connection.
 
@@ -15,14 +17,6 @@ This is the official Veritrans extension for the OpenCart E-commerce platform.
 
 5. In your _OpenCart_ admin area, enable the Veritrans plug-in and insert your merchant details (server key and client key).
 
-6. Login into your Veritrans account and change the following options:
-
-  * **Payment Notification URL** in Settings to `http://[your shop's homepage]/index.php?route=payment/veritrans/payment_notification`
-
-  * **Finish Redirect URL** in Settings to `http://[your shop’s homepage]/index.php?route=payment/veritrans/landing_redir&`
-
-  * **Error Redirect URL** in Settings to `http://[your shop’s homepage]/index.php?route=payment/veritrans/landing_redir&`
-
-  * **Unfinish Redirect URL** in Settings to `http://[your shop’s homepage]/index.php?route=payment/veritrans/landing_redir&`
+6. 6. Finish, Unfinish, Error, Notification URl configuration is the same as vtweb-opencart-2.0 configuration
 
 rewrite by CBY
