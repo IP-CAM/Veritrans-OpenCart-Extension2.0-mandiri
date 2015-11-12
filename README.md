@@ -17,6 +17,6 @@ This expansion pack is intended to use for Mandiri Online Installment.
 
 5. In your _OpenCart_ admin area, enable the Veritrans plug-in and insert your merchant details (server key and client key).
 
-6. 6. Finish, Unfinish, Error, Notification URl configuration is the same as vtweb-opencart-2.0 configuration
+6. Finish, Unfinish, Error, Notification URl configuration is the same as vtweb-opencart-2.0 configuration
 
 rewrite by CBY
