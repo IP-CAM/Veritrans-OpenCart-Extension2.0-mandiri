@@ -255,7 +255,7 @@ class ControllerPaymentVeritransmandiri extends Controller {
         }
 
         if ($is_installment && ($num_products == 1)
-            && ($transaction_details['gross_amount'] >= 500000)) {
+            && ($transaction_details['gross_amount'] >= $threshold)) {
           $payment_options['installment']['installment_terms'] = $installment_terms;
           $payloads['vtweb']['payment_options'] = $payment_options;
         }
@@ -269,12 +269,12 @@ class ControllerPaymentVeritransmandiri extends Controller {
         if ($num_products > 1) {
           $redirUrl = $warningUrl . $redirUrl . '&message=1';
         }
-        else if ($transaction_details['gross_amount'] < 500000) {
+        else if ($transaction_details['gross_amount'] < $threshold) {
           $redirUrl = $warningUrl . $redirUrl . '&message=2';
         }
       }
       else if ($this->config->get('veritransmandiri_installment_option') == 'all_product' &&
-          ($transaction_details['gross_amount'] < 500000)) {
+          ($transaction_details['gross_amount'] < $threshold)) {
         
         $warningUrl = 'index.php?route=information/warning&redirLink=';
         $redirUrl = $warningUrl . $redirUrl . '&message=2';
