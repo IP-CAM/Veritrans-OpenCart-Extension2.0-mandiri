@@ -38,6 +38,7 @@ class ControllerPaymentVeritransmandiri extends Controller {
       'entry_merchant',
       'entry_server_key',
       'entry_bin_number',
+      'entry_threshold',
       'entry_hash',
       'entry_test',
       'entry_total',
@@ -115,7 +116,8 @@ class ControllerPaymentVeritransmandiri extends Controller {
       'veritransmandiri_sanitization',
       'veritransmandiri_installment_option',
       'veritransmandiri_installment_mandiri_term',
-      'veritransmandiri_bin_number'
+      'veritransmandiri_bin_number',
+      'veritransmandiri_threshold'
     );
 
     foreach ($inputs as $input) {

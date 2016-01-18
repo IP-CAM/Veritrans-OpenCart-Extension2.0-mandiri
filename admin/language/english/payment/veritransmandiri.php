@@ -19,6 +19,7 @@ $_['entry_hash']     	 = 'Merchant Hash Key'; // v1 API only
 $_['entry_client_key']   = 'Client Key'; // v2 API only
 $_['entry_server_key']   = 'Server Key'; // v2 API only
 $_['entry_bin_number']   = 'Bin Number'; // v2 API only
+$_['entry_threshold']    = 'Threshold'; // v2 API only
 $_['entry_3d_secure']    = 'Enable 3D Secure?';
 $_['entry_payment_type'] = 'Payment Type';
 $_['entry_test']         = 'Test Mode:';

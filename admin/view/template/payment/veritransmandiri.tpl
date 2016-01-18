@@ -123,6 +123,20 @@
 						<!-- Installment term -->
 
 						<div class="form-group required v2_settings sensitive">
+							<label class="col-sm-2 control-label" for="input-threshold"><?php echo $entry_threshold; ?></label>
+							<div class="col-sm-3">
+							  <input type="textarea" name="veritransmandiri_threshold" value="<?php echo $veritransmandiri_threshold; ?>" id="input-threshold" class="form-control" />
+							  <span>Minimum transaction Limit</span>
+							</div>
+							<div class="col-sm-3">
+								<?php if (isset($error['threshold'])) { ?>
+								<div class="col-sm-3"> <?php echo $error['threshold']; ?> </div>
+								<?php } ?>
+							</div>
+						</div>
+						<!-- Threshold -->
+
+						<div class="form-group required v2_settings sensitive">
 							<label class="col-sm-2 control-label" for="input-bin-number"><?php echo $entry_bin_number; ?></label>
 							<div class="col-sm-3">
 							  <input type="textarea" name="veritransmandiri_bin_number" value="<?php echo $veritransmandiri_bin_number; ?>" id="input-bin-number" class="form-control" />

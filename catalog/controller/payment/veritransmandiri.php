@@ -9,16 +9,16 @@ class ControllerPaymentVeritransmandiri extends Controller {
     $data['errors'] = array();
     $data['button_confirm'] = $this->language->get('button_confirm');
 
-  	$data['pay_type'] = $this->config->get('veritransmandiri_payment_type');
+    $data['pay_type'] = $this->config->get('veritransmandiri_payment_type');
     $data['text_loading'] = $this->language->get('text_loading');
 
-  	$data['process_order'] = $this->url->link('payment/veritransmandiri/process_order');
+    $data['process_order'] = $this->url->link('payment/veritransmandiri/process_order');
 
     if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/veritransmandiri.tpl')) {
         return $this->load->view($this->config->get('config_template') . '/template/payment/veritransmandiri.tpl',$data);
-  	} else {
-  	  return $this->load->view('default/template/payment/veritransmandiri.tpl', $data);
-  	}
+    } else {
+      return $this->load->view('default/template/payment/veritransmandiri.tpl', $data);
+    }
 
   }
 
@@ -190,7 +190,8 @@ class ControllerPaymentVeritransmandiri extends Controller {
     $payloads['transaction_details'] = $transaction_details;
     $payloads['item_details']        = $item_details;
     $payloads['customer_details']    = $customer_details;
-
+    $threshold = $this->config->get('veritransmandiri_threshold');
+    
     try {
       $enabled_payments = array();
   
@@ -214,7 +215,7 @@ class ControllerPaymentVeritransmandiri extends Controller {
         
           $installment_terms = array();
           $term = $this->config->get('veritransmandiri_installment_mandiri_term');
-			    $term_array = explode(',', $term);
+          $term_array = explode(',', $term);
           $installment_terms['mandiri'] = $term_array;          
           $payment_options['installment']['installment_terms'] = $installment_terms;
 
@@ -237,12 +238,12 @@ class ControllerPaymentVeritransmandiri extends Controller {
         {
           //$options = $product['option'];
 
-    		  	foreach ($product['option'] as $option)
+            foreach ($product['option'] as $option)
             {
-          		if ($option['name'] == 'Payment')
+              if ($option['name'] == 'Payment')
               {
                 $option_flag =1;
-               	$installment_value = explode(' ', $option['value']);
+                $installment_value = explode(' ', $option['value']);
                   if (strtolower($installment_value[0]) == 'installment')
                   {
                     $is_installment = true;
@@ -250,7 +251,7 @@ class ControllerPaymentVeritransmandiri extends Controller {
                       = array($installment_value[2]);
                   }
               }
-    			  }
+            }
         }
 
         if ($is_installment && ($num_products == 1)
@@ -262,9 +263,9 @@ class ControllerPaymentVeritransmandiri extends Controller {
       error_log(print_r($payloads,TRUE));
       $redirUrl = Veritrans_VtWeb::getRedirectionUrl($payloads);
 
-      if ($is_installment) {
+      if ($is_installment && $this->config->get('veritransmandiri_installment_option') != 'all_product') {
         $warningUrl = 'index.php?route=information/warning&redirLink=';
-
+        
         if ($num_products > 1) {
           $redirUrl = $warningUrl . $redirUrl . '&message=1';
         }
@@ -274,6 +275,7 @@ class ControllerPaymentVeritransmandiri extends Controller {
       }
       else if ($this->config->get('veritransmandiri_installment_option') == 'all_product' &&
           ($transaction_details['gross_amount'] < 500000)) {
+        
         $warningUrl = 'index.php?route=information/warning&redirLink=';
         $redirUrl = $warningUrl . $redirUrl . '&message=2';
       }
